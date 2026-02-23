@@ -1,17 +1,18 @@
 package main
 
 import (
-	"github.com/SebastiaanKlippert/go-wkhtmltopdf"
 	"strings"
+
+	"github.com/SebastiaanKlippert/go-wkhtmltopdf"
 )
 
-func GeneratePDF(html string) ([]byte, error) {
+func GeneratePDF(html string, dpi uint) ([]byte, error) {
 	pdfg, err := wkhtmltopdf.NewPDFGenerator()
 	if err != nil {
 		return nil, err
 	}
 
-	pdfg.Dpi.Set(1200)
+	pdfg.Dpi.Set(dpi)
 	pdfg.PageSize.Set(wkhtmltopdf.PageSizeA4)
 
 	page := wkhtmltopdf.NewPageReader(strings.NewReader(html))
